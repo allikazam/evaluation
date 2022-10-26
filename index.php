@@ -3,16 +3,23 @@
 require_once 'crud.php';
 
 // je redefinie ma variable coincée dans la fonction, la pauvre il fallait la liberer :/ 
-//$result = readAll();
+$result = readAll();
 $user_id;
+ 
 // ici je mets mes conditions afin de créer et supprimer
 
 if (isset($_POST['create'])) {
     create($_POST['username'], $_POST['first_name'], $_POST['last_name'], $_POST['gender'],	$_POST['password'], $_POST['status']);
 }
 
+if (isset ($_POST['delete'])) {
+    if (isset($_POST['delete']) and is_numeric($_POST['delete'])) {
+        deleteOne($_POST['delete']);
+    }
+}
 
-$result = readOne(1) //ça marchait pas, je voulais récupérer l'utilisateur avec l'id 1 mais il veut pas venir
+//$result = readOne(1) //ça marchait pas, je voulais récupérer l'utilisateur avec l'id 1 mais il veut pas venir
+//$delete= deleteOne(5)
 ?>
 
 <!DOCTYPE html>
@@ -99,13 +106,17 @@ $result = readOne(1) //ça marchait pas, je voulais récupérer l'utilisateur av
                 <td><?= $user['gender'] ?></td>
                 <td><?= $user['password'] ?></td>
                 <td><?= $user['status'] ?></td>
-                
-                
+              
             </tr>
 
+           
          <?php   
         }
         ?>
+
+        <?php 
+         
+         ?>
     </tbody>
 </table>
 </body>
